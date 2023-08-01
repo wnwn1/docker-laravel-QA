@@ -7,25 +7,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
-<body>
-    
+<body style="padding: 60px 0;">
         <header>
-            <nav>
-                <div>
-                    <a href="{{ route('posts.index') }}">投稿アプリ</a>
+            <nav class="navbar navbar-light bg-light fixed-top" style="height: 60px;">
+                <div class="container">
+                    <a href="{{ route('posts.index') }}" class="navbar-brand">投稿アプリ</a>
                 </div>
             </nav>
         </header>    
 
         <main>
             <article>
-                <div>
-                    <h1>投稿編集</h1>
+                <div class="container">
+                    <h1 class="fs-2 my-3">投稿編集</h1>
 
                     @if ($errors->any())
-                        <div>
+                        <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -33,28 +33,29 @@
                             </ul>
                         </div>
                     @endif
-                    <div>
-                        <a href="{{ route('posts.index') }}">&lt; 戻る</a>
+
+                    <div class="mb-2">
+                        <a href="{{ route('posts.index') }}" class="text-decoration-none">&lt; 戻る</a>
                     </div>
 
                     <form action="{{ route('posts.update', $post) }}" method="post">
                         @csrf
                         @method('patch')
-                        <div>
+                        <div class="form-group mb-3">
                             <label for="title">タイトル</label>
-                            <input type="text" name="title" value="{{ old('title', $post->title) }}">
+                            <input type="text" class="form-control"name="title" value="{{ old('title', $post->title) }}">
                         </div>
-                        <div>
+                        <div class="form-group mb-3">
                             <label for="content">本文</label>
-                            <textarea name="content">{{ $post->content }}</textarea>
+                            <textarea class="form-control" name="content">{{ old('content', $post->content) }}</textarea>
                         </div>
-                        <button type="submit">更新</button>
+                        <button type="submit" class="btn btn-outline-primary">更新</button>
                     </form>
                 </div>
             </article>
         </main>
-        <footer>
-            <p>&copy; 投稿アプリ All rights reserved.</p>
+        <footer class="d-flex justify-content-center align-items-center bg-light fixed-bottom" style="htight: 60px;">
+            <p class="text-muted small mb-0">&copy; 投稿アプリ All rights reserved.</p>
         </footer>
 </body>
 </html>
