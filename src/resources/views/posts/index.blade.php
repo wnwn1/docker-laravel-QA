@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>投稿一覧</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -35,6 +38,12 @@
                         <div>
                             <a href="{{ route('posts.show', $post) }}">詳細</a>
                             <a href="{{ route('posts.edit', $post) }}">編集</a>
+
+                            <form action="{{ route('posts.destroy', $post) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit">削除</button>
+                            </form>
                         </div>
                     </div>
                 </div>

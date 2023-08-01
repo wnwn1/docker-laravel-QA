@@ -21,6 +21,11 @@ class PostController extends Controller{
 
     //作成機能
     public function store(Request $request) {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
         $post = new post();
         $post->title = $request->input('title');
         $post->content = $request->input('content');
@@ -37,10 +42,19 @@ class PostController extends Controller{
     }
     //更新機能
     public function update(Request $request, Post $post) {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
         $post->title = $request->input('title');
         $post->content = $request->input('content');
         $post->save();
         
         return redirect()->route('posts.show', $post)->with('flash_message', '投稿を編集しました。');
+    }
+    //削除機能
+    public function destroy(Post $post) {
+        $post->delete();
+        return redirect()->route('posts.index')->with('flash_message', '投稿を削除しました。');
     }
 }
